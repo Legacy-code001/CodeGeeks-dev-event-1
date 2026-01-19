@@ -12,7 +12,7 @@ interface Props {
 const EventCard = ({image, title, slug, location, date, time} : Props) => {
 
     return (
-        <Link href={`/events/${slug}`} className="poster">
+        <Link href={`/events/${slug}`} className="poster flex flex-col gap-2">
             <Image src={image} alt={title} width={410} height={300} />
 
             <div className="flex flex-row gap-2">
@@ -22,7 +22,7 @@ const EventCard = ({image, title, slug, location, date, time} : Props) => {
 
             <p className="title">{title}</p>
 
-            <div className="datetime">
+            <div className="datetime text-light-200 flex flex-row  items-center gap-4">
                 <div className="flex gap-1">
                     <Image src="icons/calendar.svg" alt="date" width={14} height={14} />
                     <p>{date}</p>
