@@ -39,6 +39,7 @@ const BookingSchema = new Schema<Booking>(
 // Index for querying bookings by event quickly.
 BookingSchema.index({ eventId: 1 });
 
+
 BookingSchema.pre('save', async function (this: BookingDocument) {
   // Ensure the referenced event exists before persisting the booking.
   if (this.isNew || this.isModified('eventId')) {
