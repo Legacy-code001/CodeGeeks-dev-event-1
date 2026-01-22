@@ -4,7 +4,9 @@ const MONGODB_URI = process.env.MONGODB_URI
 
 if (!MONGODB_URI) {
   // Fail fast during build/startup if the environment is misconfigured.
-  throw new Error("MONGODB_URI environment variable is not defined")
+  throw new Error(
+    "MONGODB_URI environment variable is not defined"
+  )
 }
 
 type MongooseCache = {

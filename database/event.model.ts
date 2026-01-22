@@ -127,7 +127,7 @@ const EventSchema = new Schema<Event>(
 );
 
 // Unique index for fast slug lookups and uniqueness enforcement.
-EventSchema.index({ slug: 1 }, { unique: true });
+EventSchema.index({ slug: -1 }, { unique: true });
 
 EventSchema.pre('save', function (this: EventDocument) {
   // Throwing from middleware cleanly aborts the save with a consistent error.
