@@ -23,6 +23,11 @@ export async function POST(req:NextRequest) {
             if(!file)
                 return NextResponse.json({message: "file is required"}, {status: 400})
 
+            const stringyTags = formData.get("tags") as string
+            const stringyAgenda = formData.get("agenda") as string
+             let tags = JSON.parse(stringyTags)
+             let agenda = JSON.parse(stringyAgenda)
+
             const arrayBuffer = await file.arrayBuffer();
             const buffer = Buffer.from(arrayBuffer)
 
@@ -37,7 +42,11 @@ export async function POST(req:NextRequest) {
 
             event.image =( uploadResult as {secure_url: string}).secure_url
             
-            const createdEvent =  await Event.create(event)
+            const createdEvent =  await Event.create({
+                ...event,
+                tags: tags,
+                agenda: agenda
+            })
 
             return NextResponse.json({message: "Event created successfully", event: createdEvent}, {status: 201})
     } catch (e) {
@@ -57,3 +66,5 @@ export async function GET(){
         
     }
 }
+
+//a route that accept a slug(/events/codegeeks-2025) as input  -> and return event details

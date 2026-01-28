@@ -1,8 +1,12 @@
 import EventCard from "./components/EventCard"
 import ExploreBtn from "./components/Explorebtn"
-import { events } from "./lib/contestant"
 
-const page = () => {
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
+
+const page = async () => {
+
+  const response = await fetch(`${BASE_URL}/api/events`, {})
+  const {events} = await response.json();
   // const events = [
   //   {title: "Event1", image: "/images/event1.png", slug: "slug-1", location: "location-1", date: "Date-1", time: "Time-1"},
   //   {title: "Event2", image: "/images/event2.png"}
@@ -16,8 +20,8 @@ const page = () => {
       <div className="mt-20 space-y-7">
         <h3>Featured Events</h3>
         <ul className="events">
-          {events.map((event) => (
-            <li key={event.title}> <EventCard {...event} /> </li>
+          {events && events.length > 0 && events.map((event: Event) => (
+            <li className="list-none" key={event.title}> <EventCard {...event} /> </li>
           ))}
         </ul>
       </div>
